@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jmp/screens/keterangan_screen.dart';
 import 'home_screen.dart';
 import 'register_screen.dart';
 import '../services/auth_service.dart';
@@ -40,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (success) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
+          MaterialPageRoute(builder: (context) => const LoginSuccessScreen()), // Diarahkan ke halaman login berhasil
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -139,6 +140,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: _isLoading ? null : _login,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.indigo, // warna background
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
                           child: _isLoading
                               ? const SizedBox(
                                   height: 20,
@@ -152,12 +160,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                   'Login',
                                   style: TextStyle(
                                     fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white, // teks jadi putih
                                   ),
                                 ),
                         ),
                       ),
-                      const SizedBox(height: 16),
-
+                      
                       // Tautan ke register
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

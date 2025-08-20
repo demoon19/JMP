@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // Widget helper untuk membuat kartu kategori
+  // Widget helper untuk membuat kartu kategori horizontal
   Widget _buildCategoryCard({
     required IconData icon,
     required String title,
@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+          height: 100,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             gradient: LinearGradient(
@@ -54,20 +54,24 @@ class _HomeScreenState extends State<HomeScreen> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Icon(icon, size: 40, color: Colors.white),
-              const SizedBox(width: 24),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center, // ⬅️ konten rata tengah
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(icon, size: 40, color: Colors.white),
+                const SizedBox(width: 16),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -89,10 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         title: const Text(
           "Dashboard",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         actions: [
           IconButton(
@@ -106,76 +107,92 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Selamat Datang, $_userName!',
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-          ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const CircleAvatar(
+                    radius: 50,
+                    backgroundColor: Colors.transparent,
+                    child: ClipOval(
+                      child: Image(
+                        image: AssetImage('assets/icon.png'),
+                        fit: BoxFit.cover,
+                        width: 100,
+                        height: 100,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Selamat Datang, $_userName!',
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 32),
 
-          // ListView untuk menampilkan kategori secara vertikal
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              children: [
-                _buildCategoryCard(
-                  icon: Icons.list_alt,
-                  title: 'Lihat Data',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => StudentListScreen(),
-                      ),
-                    );
-                  },
-                  gradientColors: [
-                    Colors.indigo.shade400,
-                    Colors.indigo.shade600
-                  ],
-                ),
-                const SizedBox(height: 16),
-                _buildCategoryCard(
-                  icon: Icons.add_box,
-                  title: 'Input Data',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AddEditStudentScreen(),
-                      ),
-                    );
-                  },
-                  gradientColors: [
-                    Colors.blue.shade400,
-                    Colors.blue.shade600
-                  ],
-                ),
-                const SizedBox(height: 16),
-                _buildCategoryCard(
-                  icon: Icons.info,
-                  title: 'Informasi',
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const InformationScreen(),
-                      ),
-                    );
-                  },
-                  gradientColors: [
-                    Colors.purple.shade400,
-                    Colors.purple.shade600
-                  ],
-                ),
-              ],
+                  // Feature Cards (horizontal)
+                  _buildCategoryCard(
+                    icon: Icons.list_alt,
+                    title: 'Lihat Data',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => StudentListScreen(),
+                        ),
+                      );
+                    },
+                    gradientColors: [
+                      Colors.indigo.shade400,
+                      Colors.indigo.shade600,
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  _buildCategoryCard(
+                    icon: Icons.add_box,
+                    title: 'Input Data',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AddEditStudentScreen(),
+                        ),
+                      );
+                    },
+                    gradientColors: [Colors.blue.shade400, Colors.blue.shade600],
+                  ),
+                  const SizedBox(height: 16),
+                  _buildCategoryCard(
+                    icon: Icons.info,
+                    title: 'Informasi',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const InformationScreen(),
+                        ),
+                      );
+                    },
+                    gradientColors: [
+                      Colors.purple.shade400,
+                      Colors.purple.shade600,
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }

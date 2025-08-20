@@ -84,13 +84,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CircleAvatar(
+                  // Ikon profil diubah menggunakan gambar aset
+                  const CircleAvatar(
                     radius: 50,
-                    backgroundColor: Colors.blue[100],
-                    child: Icon(
-                      Icons.account_circle,
-                      size: 90,
-                      color: Colors.blue[600],
+                    backgroundColor: Colors.transparent,
+                    child: ClipOval(
+                      child: Image(
+                        image: AssetImage(
+                          'assets/icon.png',
+                        ), // Path ke gambar Anda
+                        fit: BoxFit.cover,
+                        width: 100,
+                        height: 100,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20),

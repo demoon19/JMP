@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '/screens/home_screen.dart'; // Ganti dengan path yang benar
-import '/screens/login_screen.dart'; // Ganti dengan path yang benar
-import '/services/auth_service.dart'; // Ganti dengan path yang benar
+import '/screens/home_screen.dart';
+import '/screens/login_screen.dart';
+import '/services/auth_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -62,7 +62,7 @@ class _SplashScreenState extends State<SplashScreen> {
               Icon(Icons.school, size: 100, color: Colors.white),
               SizedBox(height: 24),
               Text(
-                'Kampusku App',
+                'Kampusku',
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,

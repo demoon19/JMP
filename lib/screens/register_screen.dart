@@ -62,13 +62,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return InputDecoration(
       labelText: label,
       prefixIcon: Icon(icon, color: Colors.indigo),
-      filled: true,
-      fillColor: Colors.white.withOpacity(0.9),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide.none,
+      filled: false,
+      border: const UnderlineInputBorder(),
+      enabledBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.indigo, width: 1.5),
       ),
-      contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
+      focusedBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.indigo, width: 2),
+      ),
+      contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 8),
     );
   }
 
@@ -174,6 +176,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       // Tombol Daftar
                       ElevatedButton(
                         onPressed: _isLoading ? null : _register,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.indigo, // warna tombol
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
                         child: _isLoading
                             ? const SizedBox(
                                 height: 22,
@@ -188,6 +197,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
+                                  color: Colors.white,
                                 ),
                               ),
                       ),
@@ -198,6 +208,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: () => Navigator.pop(context),
                         child: const Text(
                           "Sudah punya akun? Login",
+                          style: TextStyle(color: Colors.indigo),
                         ),
                       )
                     ],

@@ -16,7 +16,9 @@ class StudentListScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
           title: const Text('Pilih Aksi'),
           content: Text(
             'Apa yang ingin Anda lakukan dengan data ${student.name}?',
@@ -85,10 +87,7 @@ class StudentListScreen extends StatelessWidget {
         ),
         title: const Text(
           "Daftar Mahasiswa",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -118,19 +117,29 @@ class StudentListScreen extends StatelessWidget {
               final student = students[index];
               return Card(
                 elevation: 4,
-                margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+                margin: const EdgeInsets.symmetric(
+                  vertical: 8.0,
+                  horizontal: 8.0,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.indigo.shade100,
-                    child: Text(
-                      student.jenisKelamin.substring(0, 1),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.indigo,
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 10.0,
+                    horizontal: 16.0,
+                  ),
+                  leading: const CircleAvatar(
+                    radius: 25,
+                    backgroundColor: Colors.transparent,
+                    child: ClipOval(
+                      child: Image(
+                        image: AssetImage(
+                          'assets/icon.png',
+                        ), // Menggunakan ikon wisudawan
+                        fit: BoxFit.cover,
+                        width: 50,
+                        height: 50,
                       ),
                     ),
                   ),
@@ -138,8 +147,14 @@ class StudentListScreen extends StatelessWidget {
                     student.name,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  subtitle: Text("NIM: ${student.nim} | Asal: ${student.lokasi}"),
-                  trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+                  subtitle: Text(
+                    "NIM: ${student.nim} | Asal: ${student.lokasi}",
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                    color: Colors.grey,
+                  ),
                   onTap: () {
                     _showOptionsDialog(context, student);
                   },
