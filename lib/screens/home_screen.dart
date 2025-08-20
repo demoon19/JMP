@@ -36,23 +36,39 @@ class _HomeScreenState extends State<HomeScreen> {
     required IconData icon,
     required String title,
     required VoidCallback onTap,
+    required List<Color> gradientColors,
   }) {
     return Card(
-      elevation: 4.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 6.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 50, color: Theme.of(context).primaryColor),
-            const SizedBox(height: 16),
-            Text(
-              title,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            gradient: LinearGradient(
+              colors: gradientColors,
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-          ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(icon, size: 40, color: Colors.white),
+              const SizedBox(width: 24),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -62,10 +78,25 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Dashboard"),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.indigo.shade400, Colors.indigo.shade800],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        title: const Text(
+          "Dashboard",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.person),
+            icon: const Icon(Icons.person, color: Colors.white),
             onPressed: () {
               Navigator.push(
                 context,
@@ -86,13 +117,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
-          // Grid untuk menampilkan kategori
+          // ListView untuk menampilkan kategori secara vertikal
           Expanded(
-            child: GridView.count(
-              crossAxisCount: 2, // 2 kolom
-              padding: const EdgeInsets.all(16.0),
-              crossAxisSpacing: 16.0,
-              mainAxisSpacing: 16.0,
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               children: [
                 _buildCategoryCard(
                   icon: Icons.list_alt,
@@ -105,7 +133,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   },
+                  gradientColors: [
+                    Colors.indigo.shade400,
+                    Colors.indigo.shade600
+                  ],
                 ),
+                const SizedBox(height: 16),
                 _buildCategoryCard(
                   icon: Icons.add_box,
                   title: 'Input Data',
@@ -117,7 +150,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   },
+                  gradientColors: [
+                    Colors.blue.shade400,
+                    Colors.blue.shade600
+                  ],
                 ),
+                const SizedBox(height: 16),
                 _buildCategoryCard(
                   icon: Icons.info,
                   title: 'Informasi',
@@ -129,6 +167,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   },
+                  gradientColors: [
+                    Colors.purple.shade400,
+                    Colors.purple.shade600
+                  ],
                 ),
               ],
             ),

@@ -61,7 +61,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   InputDecoration _inputDecoration(String label, IconData icon) {
     return InputDecoration(
       labelText: label,
-      prefixIcon: Icon(icon, color: Colors.blueAccent),
+      prefixIcon: Icon(icon, color: Colors.indigo),
       filled: true,
       fillColor: Colors.white.withOpacity(0.9),
       border: OutlineInputBorder(
@@ -75,11 +75,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // 🔥 Gradient agar konsisten dengan login
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF4A90E2), Color(0xFF357ABD)],
+            colors: [Colors.indigo.shade400, Colors.indigo.shade800],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -174,14 +173,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       // Tombol Daftar
                       ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          backgroundColor: const Color(0xFF4A90E2),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          elevation: 3,
-                        ),
                         onPressed: _isLoading ? null : _register,
                         child: _isLoading
                             ? const SizedBox(
@@ -197,7 +188,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
                                 ),
                               ),
                       ),
@@ -208,10 +198,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: () => Navigator.pop(context),
                         child: const Text(
                           "Sudah punya akun? Login",
-                          style: TextStyle(
-                            color: Colors.blueAccent,
-                            fontWeight: FontWeight.w500,
-                          ),
                         ),
                       )
                     ],

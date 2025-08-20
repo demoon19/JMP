@@ -37,18 +37,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _buildProfileInfo(String label, String value, IconData icon) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 2,
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
-        leading: Icon(icon, color: Colors.blueAccent),
+        leading: Icon(icon, color: Colors.indigo.shade700),
         title: Text(
           label,
           style: const TextStyle(color: Colors.grey, fontSize: 14),
         ),
         subtitle: Text(
           value,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: Colors.black87,
+          ),
         ),
       ),
     );
@@ -57,16 +60,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.indigo.shade400, Colors.indigo.shade600],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
         title: const Text(
           'Profil Pengguna',
-          style: TextStyle(color: Colors.black87),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.black87),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: _userProfile == null
           ? const Center(child: CircularProgressIndicator())
@@ -78,10 +87,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   CircleAvatar(
                     radius: 50,
                     backgroundColor: Colors.blue[100],
-                    child: const Icon(
+                    child: Icon(
                       Icons.account_circle,
                       size: 90,
-                      color: Colors.blue,
+                      color: Colors.blue[600],
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -101,13 +110,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   // Info Profile dalam bentuk Card List
                   _buildProfileInfo(
-                      'Nama Lengkap', _userProfile!['name'] ?? 'N/A', Icons.person),
+                    'Nama Lengkap',
+                    _userProfile!['name'] ?? 'N/A',
+                    Icons.person,
+                  ),
                   _buildProfileInfo(
-                      'NIM', _userProfile!['nim'] ?? 'N/A', Icons.badge),
+                    'NIM',
+                    _userProfile!['nim'] ?? 'N/A',
+                    Icons.badge,
+                  ),
                   _buildProfileInfo(
-                      'Email', _userProfile!['email'] ?? 'N/A', Icons.email),
-                  _buildProfileInfo('Tanggal Registrasi',
-                      _userProfile!['registrationDate'] ?? 'N/A', Icons.calendar_today),
+                    'Email',
+                    _userProfile!['email'] ?? 'N/A',
+                    Icons.email,
+                  ),
+                  _buildProfileInfo(
+                    'Tanggal Registrasi',
+                    _userProfile!['registrationDate'] ?? 'N/A',
+                    Icons.calendar_today,
+                  ),
 
                   const SizedBox(height: 32),
 
@@ -121,10 +142,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.redAccent,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
                         textStyle: const TextStyle(fontSize: 16),
                       ),
                     ),

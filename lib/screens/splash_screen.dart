@@ -18,10 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     // Memulai timer saat halaman pertama kali dibuka
-    Timer(
-      const Duration(seconds: 3),
-      () => _checkLoginStatus(),
-    );
+    Timer(const Duration(seconds: 5), () => _checkLoginStatus());
   }
 
   void _checkLoginStatus() async {
@@ -36,13 +33,13 @@ class _SplashScreenState extends State<SplashScreen> {
       // Jika sudah login, arahkan ke HomeScreen
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
       );
     } else {
       // Jika belum login, arahkan ke LoginScreen
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
       );
     }
   }
@@ -50,26 +47,30 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade800,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Icon(
-              Icons.school,
-              size: 100,
-              color: Colors.white,
-            ),
-            SizedBox(height: 24),
-            Text(
-              'Kampusku App',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.indigo.shade400, Colors.indigo.shade800],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Icon(Icons.school, size: 100, color: Colors.white),
+              SizedBox(height: 24),
+              Text(
+                'Kampusku App',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -105,23 +105,28 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.indigo.shade400, Colors.indigo.shade600],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
         title: Text(
           _isEditMode ? 'Edit Mahasiswa' : 'Tambah Mahasiswa',
-          style: const TextStyle(color: Colors.black),
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          elevation: 3,
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(
@@ -132,11 +137,9 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
                   TextFormField(
                     controller: _nimController,
                     enabled: !_isEditMode,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'NIM',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                      prefixIcon: Icon(Icons.badge_outlined),
                     ),
                     validator: (value) => value == null || value.isEmpty
                         ? 'NIM wajib diisi'
@@ -147,11 +150,9 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
                   // Nama
                   TextFormField(
                     controller: _nameController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Nama Lengkap',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                      prefixIcon: Icon(Icons.person_outline),
                     ),
                     validator: (value) => value == null || value.isEmpty
                         ? 'Nama wajib diisi'
@@ -163,12 +164,9 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
                   TextFormField(
                     controller: _birthDateController,
                     readOnly: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Tanggal Lahir',
-                      suffixIcon: const Icon(Icons.calendar_today),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                      prefixIcon: Icon(Icons.calendar_today_outlined),
                     ),
                     onTap: _selectDate,
                     validator: (value) => value == null || value.isEmpty
@@ -191,11 +189,9 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
                         _selectedGender = newValue;
                       });
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Jenis Kelamin',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                      prefixIcon: Icon(Icons.wc_outlined),
                     ),
                     validator: (value) =>
                         value == null ? 'Jenis kelamin wajib dipilih' : null,
@@ -205,11 +201,9 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
                   // Lokasi
                   TextFormField(
                     controller: _locationController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Lokasi (Kota Asal)',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                      prefixIcon: Icon(Icons.location_on_outlined),
                     ),
                     validator: (value) => value == null || value.isEmpty
                         ? 'Lokasi wajib diisi'
@@ -223,19 +217,14 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
                     child: ElevatedButton(
                       onPressed: _onSave,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueAccent,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
+                        backgroundColor: Colors
+                            .indigo, // Menambahkan warna background indigo
+                        foregroundColor: Colors
+                            .white, // Membuat teks menjadi putih agar kontras
                       ),
                       child: Text(
                         _isEditMode ? 'Perbarui' : 'Simpan',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color:
-                              Colors.white, // 🔥 Tambahkan warna putih di sini
-                        ),
+                        style: const TextStyle(fontSize: 16),
                       ),
                     ),
                   ),
