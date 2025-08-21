@@ -20,6 +20,8 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
   late final TextEditingController _nimController;
   late final TextEditingController _birthDateController;
   late final TextEditingController _locationController;
+  late final TextEditingController _phoneController;
+  late final TextEditingController _prodiController;
 
   String? _selectedGender;
   final List<String> _genderOptions = ['Laki-laki', 'Perempuan'];
@@ -33,6 +35,8 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
     _nimController = TextEditingController();
     _birthDateController = TextEditingController();
     _locationController = TextEditingController();
+    _phoneController = TextEditingController();
+    _prodiController = TextEditingController();
 
     if (widget.student != null) {
       _isEditMode = true;
@@ -41,6 +45,8 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
       _birthDateController.text = widget.student!.tanggalLahir;
       _locationController.text = widget.student!.lokasi;
       _selectedGender = widget.student!.jenisKelamin;
+      _phoneController.text = widget.student!.noTelepon;
+      _prodiController.text = widget.student!.prodi;
     }
   }
 
@@ -50,6 +56,8 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
     _nimController.dispose();
     _birthDateController.dispose();
     _locationController.dispose();
+    _phoneController.dispose();
+    _prodiController.dispose();
     super.dispose();
   }
 
@@ -77,6 +85,8 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
         ..tanggalLahir = _birthDateController.text
         ..jenisKelamin = _selectedGender!
         ..lokasi = _locationController.text
+        ..noTelepon = _phoneController.text
+        ..prodi = _prodiController.text
         ..id = _nimController.text;
 
       await _hiveService.addOrUpdateStudent(newStudent);
@@ -207,6 +217,33 @@ class _AddEditStudentScreenState extends State<AddEditStudentScreen> {
                     ),
                     validator: (value) => value == null || value.isEmpty
                         ? 'Lokasi wajib diisi'
+                        : null,
+                  ),
+                  const SizedBox(height: 16.0),
+
+                  // Nomor Telepon
+                  TextFormField(
+                    controller: _phoneController,
+                    decoration: const InputDecoration(
+                      labelText: 'Nomor Telepon',
+                      prefixIcon: Icon(Icons.phone_outlined),
+                    ),
+                    keyboardType: TextInputType.phone,
+                    validator: (value) => value == null || value.isEmpty
+                        ? 'Nomor telepon wajib diisi'
+                        : null,
+                  ),
+                  const SizedBox(height: 16.0),
+
+                  // Program Studi
+                  TextFormField(
+                    controller: _prodiController,
+                    decoration: const InputDecoration(
+                      labelText: 'Program Studi',
+                      prefixIcon: Icon(Icons.school_outlined),
+                    ),
+                    validator: (value) => value == null || value.isEmpty
+                        ? 'Program studi wajib diisi'
                         : null,
                   ),
                   const SizedBox(height: 24.0),

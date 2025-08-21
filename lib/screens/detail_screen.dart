@@ -114,6 +114,10 @@ class StudentDetailScreen extends StatelessWidget {
                   Icons.person_outline,
                 ),
                 _buildInfoRow('Lokasi', student.lokasi, Icons.location_on),
+                _buildInfoRow(
+                    'Nomor Telepon', student.noTelepon, Icons.phone),
+                _buildInfoRow(
+                    'Program Studi', student.prodi, Icons.school),
               ],
             ),
           ),

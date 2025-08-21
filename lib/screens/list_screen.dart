@@ -148,7 +148,7 @@ class StudentListScreen extends StatelessWidget {
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
-                    "NIM: ${student.nim} | Asal: ${student.lokasi}",
+                    "NIM: ${student.nim} | Prodi: ${student.prodi}",
                   ),
                   trailing: const Icon(
                     Icons.arrow_forward_ios,

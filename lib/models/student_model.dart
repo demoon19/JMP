@@ -22,5 +22,9 @@ class Student extends HiveObject {
   @HiveField(5)
   late String lokasi;
 
-  get prodi => null;
+  @HiveField(6)
+  late String noTelepon;
+
+  @HiveField(7)
+  late String prodi;
 }
